@@ -1,6 +1,6 @@
 # Home Automation Server
 
-#TODO ABOUT
+This is the source code of our hardware mod for the Rollotron 1800 by Rademacher. It uses the GPIO pins of a Raspberry Pi Zero W and some sketchy soldering to access the hardware buttons. This makes it possible to control the shutter via a *beautiful* webinterface, enabling the user to stay in bed indefinitely.
 
 ### Prerequisites
 
