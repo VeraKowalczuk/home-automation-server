@@ -10,11 +10,11 @@ function getreq() {
     });
 }
 
-const groupTemplate = ({groupName}) => `
+const groupTemplate = ({name, members}) => `
 <div class="card">
     <div class="card-header">
         <a class="card-link" data-toggle="collapse" href="#collapseOne">
-            ${ groupName }
+            ${ name }
         </a>
     </div>
     <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -22,16 +22,24 @@ const groupTemplate = ({groupName}) => `
             <button onclick="up()" class="button" > Up </button>
             <button onclick="down()" class="button" > Down </button>
         </div>
+        <div class="card-body">
+            ${ 
+                (() => {
+                    var str = '';
+                    for(var i = 0; i < members.length; i++) {
+                        str += members[i].id;
+                    }
+                    return str;
+                })()
+			}
+        </div>
     </div>
 </div>
 `
 
 function getconfig() {
-    $('accordion').html(["test1", "test2"].map(groupTemplate).join(''));
-    
-    return;
     $.getJSON("http://192.168.178.96:5000/config", function(data) {
-        var groups = data.groups;
-        console.log(data.servers[0].host);
+        $('#accordion').html(data.groups.map(groupTemplate).join(''));
     });
+    
 }
