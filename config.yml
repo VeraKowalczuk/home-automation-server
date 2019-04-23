@@ -1,0 +1,8 @@
+groups:
+    - name: Vera
+      members: 
+        - id: devmacbook
+          host: http://192.168.178.96:4000
+      
+
+    
