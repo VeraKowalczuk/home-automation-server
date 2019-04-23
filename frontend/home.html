@@ -26,57 +26,79 @@
     <link href="./home_style.css" type="text/css" rel="stylesheet">
 </head>   
 <body>
-    <h1 id="header">Home Automation Assistant</h1>
     
     <div class="block">
-        <div class="btn-group" role="group" aria-label="Group Buttons">
-            <button type="button" class="btn btn-primary">Testgruppe 1</button>
-            <button type="button" class="btn btn-primary">Testgruppe 2</button>
-            <button type="button" class="btn btn-primary">Testgruppe 3</button>
-        </div>
+        <div class="container">
+            <h2 id="header">Home Automation Assistant</h2>
+          
+                <!-- <div class="btn-group" role="group" aria-label="Group Buttons">
+                    <button type="button" class="btn btn-primary">Testgruppe 1</button>
+                    <button type="button" class="btn btn-primary">Testgruppe 2</button>
+                    <button type="button" class="btn btn-primary">Testgruppe 3</button>
+                  </div> -->
 
-        <div id="accordion">
-            <div class="card">
-              <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                  Testgruppe 1
-                </a>
-              </div>
-              <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                <div class="card-body">
-                    <button onclick="up()" class="button" > Up </button>
-                    <button onclick="down()" class="button" > Down </button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
+
+          
+          <div id="accordion">
+              <div class="card">
                 <div class="card-header">
-                  <a class="card-link" data-toggle="collapse" href="#collapseTwo">
-                    Testgruppe 2
+                  <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    Testgruppe 1
                   </a>
                 </div>
-                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
                   <div class="card-body">
-                      <button onclick="up()"  class="button" > Up </button>
-                      <button onclick="down()" class="button" > Down </button>
-                  </div>
+                      <div class="pb-3">
+                          <button onclick="up()" type="button" class = "btn btn-outline-secondary"> Up </button>
+                          <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
+                          
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6 col-lg-4 col-sm-12 pb-3">
+                              <div class="card">
+                                  <div class="card-header">Fenster 1</div>
+                                  <div class="card-body">
+                                      <button onclick="up()" type="button" class = "btn btn-outline-secondary"> Up </button>
+                                      <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
+                                  </div>
+                                </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4 col-sm-12 pb-3">
+                              <div class="card">
+                                  <div class="card-header">Fenster 1</div>
+                                  <div class="card-body">
+                                      <button onclick="up()" type="button" class = "btn btn-outline-secondary"> Up </button>
+                                      <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
+                                  </div>
+                                </div>
+                          </div>
+                      </div>
                 </div>
               </div>
-        </div>
+              <div class="card">
+                  <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapseTwo">
+                      Testgruppe 2
+                    </a>
+                  </div>
+                  <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <button onclick="up()"  type="button" class = "btn btn-outline-secondary" > Up </button>
+                        <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
+                    </div>
+                  </div>
+                </div>
+          </div>
 
-        <div id='groups'>
-            <p>Click to do something. </p>
-            
-            
-            <!--<button onclick="getreq()" id="get" class="button" > Get </button>
-            <button onclick="postreq()" id="post" class="button" > Post </button>-->
-            <div id="buttontest">
-                <button onclick="up()" id="up" class="button" > Up </button>
-                <button onclick="down()" id="down" class="button" > Down </button>
-            </div>
-            
+
+
+
+        </div>
+        
+        <div class="container">
             
         </div>
+        
             
     
     </div>
