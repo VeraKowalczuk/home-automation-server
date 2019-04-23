@@ -1,111 +1,66 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title> Home Automation Assistant </title>
-    <!-- Passt die Seite an den Bildschirm an! -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title> Home Automation Assistant </title>
+  <!-- Passt die Seite an den Bildschirm an! -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
-    
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-    <!-- Style -->
-    <meta charset="utf-8"/>
-    <link href="./home_style.css" type="text/css" rel="stylesheet">
-</head>   
+
+  <!-- Style -->
+  <meta charset="utf-8" />
+  <link href="./home_style.css" type="text/css" rel="stylesheet">
+</head>
+
 <body>
-    
-    <div class="block">
-        <div class="container">
-            <h2 id="header">Home Automation Assistant</h2>
-          
-                <!-- <div class="btn-group" role="group" aria-label="Group Buttons">
+
+  <div class="block">
+    <div class="container">
+      <h2 id="header">Home Automation Assistant</h2>
+
+      <!-- <div class="btn-group" role="group" aria-label="Group Buttons">
                     <button type="button" class="btn btn-primary">Testgruppe 1</button>
                     <button type="button" class="btn btn-primary">Testgruppe 2</button>
                     <button type="button" class="btn btn-primary">Testgruppe 3</button>
                   </div> -->
 
 
-          
-          <div id="accordion">
-              <div class="card">
-                <div class="card-header">
-                  <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                    Testgruppe 1
-                  </a>
-                </div>
-                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                  <div class="card-body">
-                      <div class="pb-3">
-                          <button onclick="up()" type="button" class = "btn btn-outline-secondary"> Up </button>
-                          <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
-                          
-                      </div>
-                      <div class="row">
-                          <div class="col-md-6 col-lg-4 col-sm-12 pb-3">
-                              <div class="card">
-                                  <div class="card-header">Fenster 1</div>
-                                  <div class="card-body">
-                                      <button onclick="up()" type="button" class = "btn btn-outline-secondary"> Up </button>
-                                      <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
-                                  </div>
-                                </div>
-                          </div>
-                          <div class="col-md-6 col-lg-4 col-sm-12 pb-3">
-                              <div class="card">
-                                  <div class="card-header">Fenster 1</div>
-                                  <div class="card-body">
-                                      <button onclick="up()" type="button" class = "btn btn-outline-secondary"> Up </button>
-                                      <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
-                                  </div>
-                                </div>
-                          </div>
-                      </div>
-                </div>
-              </div>
-              <div class="card">
-                  <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" href="#collapseTwo">
-                      Testgruppe 2
-                    </a>
-                  </div>
-                  <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <button onclick="up()"  type="button" class = "btn btn-outline-secondary" > Up </button>
-                        <button onclick="down()" type="button" class = "btn btn-outline-secondary" > Down </button>
-                    </div>
-                  </div>
-                </div>
-          </div>
+
+      <div id="accordion">
+        Loading devices
+      </div>
 
 
 
 
-        </div>
-        
-        <div class="container">
-            
-        </div>
-        
-            
-    
     </div>
-    
-    <!-- Skript -->    
-    <script src="./script.js"></script>  
-    
-    <script type="text/javascript">
-        window.onload = getconfig;
-    </script>
+
+    <div class="container">
+
+    </div>
+
+
+
+  </div>
+
+  <!-- Skript -->
+  <script src="./script.js"></script>
+
+  <script type="text/javascript">
+    window.onload = getconfig;
+  </script>
 </body>
-    
+
 </html>
