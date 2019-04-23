@@ -10,28 +10,49 @@ function getreq() {
     });
 }
 
-const groupTemplate = ({groupName}) => `
+const groupTemplate = ({name, members}) => `
 <div class="card">
     <div class="card-header">
         <a class="card-link" data-toggle="collapse" href="#collapseOne">
-            ${ groupName }
+            ${ name }
         </a>
     </div>
     <div id="collapseOne" class="collapse show" data-parent="#accordion">
         <div class="card-body">
-            <button onclick="up()" class="button" > Up </button>
-            <button onclick="down()" class="button" > Down </button>
+            <button onclick="move('${ name }', '', 'up')" class="button" > Up </button>
+            <button onclick="move('${ name }', '', 'down')" class="button" > Down </button>
+        </div>
+        <div class="card-body">
+            ${ 
+                (() => {
+                    var str = '';
+                    for(var i = 0; i < members.length; i++) {
+                        var memberName = members[i].id;
+                        str += `${ memberName }
+                                <button onclick="move('${ name }', '${ memberName }', 'up')" class="button" > Up </button>
+                                <button onclick="move('${ name }', '${ memberName }', 'down')" class="button" > Down </button>
+                                <br>`;
+                    }
+                    return str;
+                })()
+			}
         </div>
     </div>
 </div>
 `
 
+function move(group, name, direction) {
+    var dollar = '$';
+    if(name === "") {
+        dollar = '';   
+    }
+    $.post("http://192.168.178.96:5000/control/" + group + dollar + name + "/" + direction);
+    console.log(group + " " + name + " " + direction);
+}
+
 function getconfig() {
-    $('accordion').html(["test1", "test2"].map(groupTemplate).join(''));
-    
-    return;
     $.getJSON("http://192.168.178.96:5000/config", function(data) {
-        var groups = data.groups;
-        console.log(data.servers[0].host);
+        $('#accordion').html(data.groups.map(groupTemplate));
     });
+    
 }
