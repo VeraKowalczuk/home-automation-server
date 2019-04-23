@@ -55,12 +55,12 @@ function move(group, name, direction) {
         dollar = '';   
     }
     $.post("http://192.168.178.96:5000/control/" + group + dollar + name + "/" + direction);
-    console.log(group + " " + name + " " + direction);
 }
 
 function getconfig() {
     $.getJSON("http://192.168.178.96:5000/config", function(data) {
         $('#accordion').html(data.groups.map(groupTemplate));
+        $('#collapse' + data.groups[0].name).addClass("show");
     });
     
 }
