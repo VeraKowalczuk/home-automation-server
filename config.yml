@@ -1,8 +1,13 @@
 groups:
     - name: Vera
       members: 
-        - id: devmacbook
+        - id: test-device
+          host: http://192.168.178.103:4000
+        - id: dev-macbook
           host: http://192.168.178.96:4000
+    
+
+        
       
 
     

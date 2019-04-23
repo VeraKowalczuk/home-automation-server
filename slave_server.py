@@ -7,10 +7,6 @@ def index():
     return 'Server Works!'
 
 
-@app.route('/greet')
-def say_hello():
-    return 'Hello from Server'
-
 @app.route('/up', methods=['POST'])
 def up():
   if request.method == 'POST':
