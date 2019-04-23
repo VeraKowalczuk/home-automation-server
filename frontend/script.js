@@ -21,7 +21,7 @@ const groupTemplate = ({name, members}) => `
         <div class="card-body">
             <div class="pb-3">
                 <button onclick="move('${ name }', '', 'up')" type="button" class = "btn btn-outline-secondary"> Up </button>
-                <button onclick="move('${ name }', '', 'up')" type="button" class = "btn btn-outline-secondary" > Down </button>
+                <button onclick="move('${ name }', '', 'down')" type="button" class = "btn btn-outline-secondary" > Down </button>
             </div>
             <div class="row">
                 ${ 
