@@ -36,21 +36,3 @@ p, label {
     margin-top: 5px;
     
 }
-
-#convertLink {
-    margin: 10px;
-}
-
-#displayLink {
-    margin: 10px;
-}
-
-#newLink {
-    padding: 10px;
-    padding-bottom: 0px;
-}
-
-#copy {
-    display: inline;
-    margin-top: 0px;
-}
