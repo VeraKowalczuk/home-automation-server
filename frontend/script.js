@@ -1,11 +1,11 @@
 function postreq() {
-    $.post("http://192.168.178.96:5000/login", function (data) {
+    $.post("http://" + window.location.hostname + ":5000/login", function (data) {
         console.log(data);
     });
 }
 
 function getreq() {
-    $.get("http://192.168.178.96:5000/login", function (data) {
+    $.get("http://" + window.location.hostname + ":5000/login", function (data) {
         console.log(data);
     });
 }
@@ -54,11 +54,11 @@ function move(group, name, direction) {
     if(name === "") {
         dollar = '';   
     }
-    $.post("http://192.168.178.96:5000/control/" + group + dollar + name + "/" + direction);
+    $.post("http://" + window.location.hostname + ":5000/control/" + group + dollar + name + "/" + direction);
 }
 
 function getconfig() {
-    $.getJSON("http://192.168.178.96:5000/config", function(data) {
+    $.getJSON("http://" + window.location.hostname + ":5000/config", function(data) {
         $('#accordion').html(data.groups.map(groupTemplate));
         $('#collapse' + data.groups[0].name).addClass("show");
     });
