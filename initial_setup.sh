@@ -12,7 +12,7 @@ rm -r /var/www/html/*
 cp frontend/* /var/www/html/
 cp local-config-default.yml local-config.yml
 chmod 666 local-config.yml
-$CURRENT_PATH=$(dirname "$(readlink -f "$0")")
-$SCRIPT_PATH="$CURRENT_PATH/start_server.sh"
+CURRENT_PATH=$(dirname "$(readlink -f "$0")")
+SCRIPT_PATH="$CURRENT_PATH/start_server.sh"
 sed -i "s/{#SCRIPT_PATH#}/$SCRIPT_PATH/g" home-automation-server.service
 /bin/bash start_server.sh
