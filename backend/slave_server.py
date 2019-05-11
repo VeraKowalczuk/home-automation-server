@@ -13,11 +13,13 @@ def check_timers():
     t.start()
 
     with open(os.path.join(os.path.dirname(__file__), ".timer"), 'r') as f:
-      shutoff_time = datetime.datetime.strptime(f.readline(), '%m/%d/%y %H:%M:%S')
-
-    if (shutoff_time > datetime.datetime.now() ):
-      # TODO: SHUTOFF LIGHT WITH GPIO
-      reset_timer()
+      line = f.readline()
+      
+      if line != "NO TIMER":
+        shutoff_time = datetime.datetime.strptime(f.readline(), '%m/%d/%y %H:%M:%S')
+        if (shutoff_time > datetime.datetime.now() ):
+          # TODO: SHUTOFF LIGHT WITH GPIO
+          reset_timer()
 
 def reset_timer():
   with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as f:
