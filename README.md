@@ -9,21 +9,30 @@ Apache
 Python3
 Tmux
 ```
+### Installation
 
-### Installing
+1. Install a [Raspbian Image](https://www.raspberrypi.org/downloads/) on the Pi Zero.
 
-1. Clone the project and cd into the root directory
+2. Clone the project onto the Raspberry Pi and cd into the root directory.
 
-2. To install the needed python packages run
+3. Run
 
     ```
-    pip3 install -r requirements.txt
+    ./initial_setup.sh
     ```
-3. #TODO
+
+4. Update your network specific details in ```config.yml```
+
+5. Update your device specific details (mainly which pons the up/down buttons are soldered to) in ```local-config.yml```
+
 
 # Running the Server
 
+
+
 # Accessing the UI
+
+
 
 ## Running the tests
 

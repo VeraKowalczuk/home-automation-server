@@ -1,0 +1,6 @@
+pins:
+  up: 10
+  down: 27 
+misc:
+  button_press_duration_seconds: 0.5
+  softtimer_check_interval_seconds: 1

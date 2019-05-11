@@ -1,0 +1,13 @@
+[Unit]
+Description=Home Automation Server - Slave
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=root
+ExecStart={#SCRIPT_PATH#}
+
+[Install]
+WantedBy=multi-user.target
