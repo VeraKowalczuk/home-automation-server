@@ -4,6 +4,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+apt-get update
+apt-get upgrade -y
 apt-get install -y apache2 python3 python3-pip tmux
 pip3 install -r requirements.txt
 cp frontend/* /var/www/html/
