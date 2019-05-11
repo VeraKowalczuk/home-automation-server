@@ -13,12 +13,10 @@ cp frontend/* /var/www/html/
 cp local-config-default.yml local-config.yml
 chmod 666 local-config.yml
 CURRENT_PATH=$(dirname "$(readlink -f "$0")")
-
-MASTER_LAUNCH_CMD="export FLASK_APP=$CURRENT_PATH/backend/master_server.py; flask run --host=0.0.0.0 --port=5000"
-SLAVE_LAUNCH_CMD="export FLASK_APP=$CURRENT_PATH/backend/slave_server.py; flask run --host=0.0.0.0 --port=5000"
-
-sed -i "s@{#LAUNCH_CMD#}@$MASTER_LAUNCH_CMD@g" home-automation-server-master.service
-sed -i "s@{#LAUNCH_CMD#}@$SLAVE_LAUNCH_CMD@g" home-automation-server-slave.service
+MASTER_PYTHON_PATH="$CURRENT_PATH/backend/master_server.py"
+SLAVE_PYTHON_PATH="$CURRENT_PATH/backend/slave_server.py"
+sed -i "s@{#PYTHON_PATH#}@$MASTER_PYTHON_PATH@g" home-automation-server-master.service
+sed -i "s@{#PYTHON_PATH#}@$SLAVE_PYTHON_PATH@g" home-automation-server-slave.service
 cp home-automation-server-master.service /etc/systemd/system/
 cp home-automation-server-slave.service /etc/systemd/system/
 systemctl enable home-automation-server-master
