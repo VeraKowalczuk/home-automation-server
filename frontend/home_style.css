@@ -33,6 +33,10 @@ p, label {
     padding: 5px;
     font-family: sans-serif;
     font-size: 120%;
-    margin-top: 5px;
+    margin: 2vh;
     
+}
+
+.timerbutton{
+    margin: 2vh;
 }
