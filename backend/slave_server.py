@@ -13,9 +13,9 @@ def check_timers():
     t.start()
 
     with open(os.path.join(os.path.dirname(__file__), ".timer"), 'r') as f:
-      shutoff_time = datetime.strptime(f.readline(), '%m/%d/%y %H:%M:%S')
+      shutoff_time = datetime.datetime.strptime(f.readline(), '%m/%d/%y %H:%M:%S')
 
-    if (shutoff_time > datetime.now ):
+    if (shutoff_time > datetime.datetime.now() ):
       # TODO: SHUTOFF LIGHT WITH GPIO
       reset_timer()
 
@@ -40,7 +40,7 @@ GPIO.setup(pin_down, GPIO.OUT)
 
 
 ## Schedule softtimer checks
-if(os.path.isfile(os.path.join(os.path.dirname(__file__), ".timer"))):
+if(not os.path.isfile(os.path.join(os.path.dirname(__file__), ".timer"))):
   reset_timer()
 
 t = threading.Timer(softtimer_check_interval, check_timers)
@@ -95,7 +95,7 @@ def light_swich(onoff):
 def light_timer(seconds):
   if request.method == 'POST':
     
-    shutoff_time = datetime.now() + datetime.timedelta(seconds=seconds)
+    shutoff_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
     with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as f:
       f.write(shutoff_time)
       
