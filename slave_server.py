@@ -1,6 +1,7 @@
 from flask import Flask, request
 import RPi.GPIO as GPIO
 import time
+import atexit
 
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
@@ -15,9 +16,9 @@ def index():
 @app.route('/up', methods=['POST'])
 def up():
   if request.method == 'POST':
-      GPIO.output(10, GPIO.HIGH)
+      GPIO.output(27, GPIO.HIGH)
       time.sleep(0.5)
-      GPIO.output(10, GPIO.LOW)
+      GPIO.output(27, GPIO.LOW)
       print('UUUP')
       return 'UP'
 
@@ -25,8 +26,14 @@ def up():
 @app.route('/down', methods=['POST'])
 def down():
   if request.method == 'POST':
-      GPIO.output(27, GPIO.HIGH)
+      GPIO.output(10, GPIO.HIGH)
       time.sleep(0.5)
-      GPIO.output(27, GPIO.LOW)
+      GPIO.output(10, GPIO.LOW)
       print('DOOOWN')
       return 'DOWN'
+
+def exit_handler():
+    print('Shutting down...')
+    GPIO.cleanup()
+
+atexit.register(exit_handler)
