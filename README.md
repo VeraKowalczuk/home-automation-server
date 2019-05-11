@@ -18,10 +18,12 @@ Tmux
 3. Run
 
     ```
-    ./installationscript.sh
+    ./initial_setup.sh
     ```
 
-4. 
+4. Update your network specific details in ```config.yml```
+
+5. Update your device specific details (mainly which pons the up/down buttons are soldered to) in ```local-config.yml```
 
 
 # Running the Server

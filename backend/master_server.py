@@ -9,6 +9,30 @@ def create_response(res):
     response_master.headers['Access-Control-Allow-Origin'] = '*'
     return response_master
 
+def distribute_post_request(name, request):
+
+    # the frontend sends the name in the format [ group | group$member ] for namepsacing purposes
+    if '$' in name:
+            namesplit = name.split('$')
+            groupname = namesplit[0]
+            memberid = namesplit[1]
+            for group in cfg['groups']:
+                if group['name'] == groupname:
+                    for member in group['members']:
+                        if member['id'] == memberid:
+                            response_slave = req.post(member['host'] + request)
+                            return create_response(response_slave.text)
+    else:
+        for group in cfg['groups']:
+            if name == group['name']:
+                responses_slaves = list()
+
+                for member in group['members']:
+                    responses_slaves.append(req.post(member['host'] + request).text)
+
+                return create_response(responses_slaves)
+
+
 
 with open(os.path.join(os.path.dirname(__file__),"../config.yml"), 'r') as ymlfile:
     cfg = yaml.load(ymlfile,Loader=yaml.SafeLoader)
@@ -28,7 +52,6 @@ def index():
 def config():
     if request.method == 'POST':
         #TODO
-
         return 'POST'
 
     elif request.method == 'GET':
@@ -38,27 +61,9 @@ def config():
         return resp
 
 
-@app.route('/control/<name>/<direction>', methods=['POST'])
-def control(name, direction):
+@app.route('/distribute/<name>/<path:subpath>', methods=['POST'])
+def control(name, subpath):
     if request.method == 'POST':
+        return distribute_post_request(name, '/'+subpath)
 
-        if '$' in name:
-            namesplit = name.split('$')
-            groupname = namesplit[0]
-            memberid = namesplit[1]
-            for group in cfg['groups']:
-                if group['name'] == groupname:
-                    for member in group['members']:
-                        if member['id'] == memberid:
-                            response_slave = req.post(member['host'] + '/' + direction)
-                            return create_response(response_slave.text)
 
-        else:
-            for group in cfg['groups']:
-                if name == group['name']:
-                    responses_slaves = list()
-
-                    for member in group['members']:
-                        responses_slaves.append(req.post(member['host']+'/'+direction).text)
-
-                    return create_response(responses_slaves)

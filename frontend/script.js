@@ -49,12 +49,28 @@ const groupTemplate = ({name, members}) => `
     </div>
 `
 
-function move(group, name, direction) {
+function move(group, name, direction) { // direction : [up | down]
     var dollar = '$';
     if(name === "") {
         dollar = '';   
     }
-    $.post("http://" + window.location.hostname + ":5000/control/" + group + dollar + name + "/" + direction);
+    $.post("http://" + window.location.hostname + ":5000/" + group + dollar + name + "/shutter/" + direction);
+}
+
+function lightswitch(group, name, onoff) { // onoff : [on | off]
+    var dollar = '$';
+    if(name === "") {
+        dollar = '';   
+    }
+    $.post("http://" + window.location.hostname + ":5000/" + group + dollar + name + "/light/switch/" + onoff);
+}
+
+function light_offtimer(group, name, seconds) { 
+    var dollar = '$';
+    if(name === "") {
+        dollar = '';   
+    }
+    $.post("http://" + window.location.hostname + ":5000/" + group + dollar + name + "/light/offtimer/" + seconds);
 }
 
 function getconfig() {
