@@ -4,12 +4,12 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+tmux kill-server
 apt-get update
 apt-get upgrade -y
-apt-get install -y apache2 python3 python3-pip tmux
+git fetch --all
+git reset --hard origin/master
 pip3 install -r requirements.txt
 rm -r /var/www/html/*
 cp frontend/* /var/www/html/
-cp local-config-default.yml local-config.yml
-chmod 666 local-config.yml
 /bin/bash start_server.sh
