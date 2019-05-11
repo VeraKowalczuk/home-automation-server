@@ -37,13 +37,11 @@ softtimer_check_interval = cfg['misc']['softtimer_check_interval_seconds']
 GPIO.setup(pin_up, GPIO.OUT)
 GPIO.setup(pin_down, GPIO.OUT)
 
-if():
+if(os.path.isfile(os.path.join(os.path.dirname(__file__), ".timer"))):
   reset_timer()
 
 t = threading.Timer(softtimer_check_interval.0, check_timers)
 t.start() 
-
-
 
 @app.route('/')
 def index():
@@ -65,7 +63,7 @@ def shutter(direction):
       else if (direction == "up"):
         pin_used = pin_up
       else:
-        return 'No sch direction: '+ direction
+        return 'No such direction: '+ direction
         
       GPIO.output(pin_used, GPIO.HIGH)
       time.sleep(button_press_duration)
