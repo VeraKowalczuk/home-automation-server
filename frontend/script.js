@@ -73,10 +73,20 @@ function light_offtimer(group, name, seconds) {
     $.post("http://" + window.location.hostname + ":5000/" + group + dollar + name + "/light/offtimer/" + seconds);
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function getconfig() {
     $.getJSON("http://" + window.location.hostname + ":5000/config", function(data) {
         $('#accordion').html(data.groups.map(groupTemplate));
         $('#collapse' + data.groups[0].name).addClass("show");
-    });
+    })
+    .fail(async function() {
+        $('#accordion').html("Failed to load devices, retrying...");
+        await sleep(5000);
+        getconfig();
+    })
+    ;
     
 }

@@ -1,10 +1,10 @@
 groups:
     - name: Vera
       members: 
-        - id: test-device
+        - id: Balkon
           host: http://192.168.178.103:4000
-        - id: dev-macbook
-          host: http://192.168.178.96:4000
+        - id: Fenster
+          host: http://192.168.178.102:4000
     
 
         

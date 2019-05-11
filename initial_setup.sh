@@ -11,5 +11,7 @@ pip3 install -r requirements.txt
 rm -r /var/www/html/*
 cp frontend/* /var/www/html/
 cp local-config-default.yml local-config.yml
-chmod 777 local-config.yml
+chmod 666 local-config.yml
+$SCRIPT_PATH=rname "$(readlink -f "$0")/start_server.sh"
+sed -i "s/{#SCRIPT_PATH#}/$SCRIPT_PATH/g" home-automation-server.txt
 /bin/bash start_server.sh
