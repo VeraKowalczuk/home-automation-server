@@ -11,4 +11,5 @@ pip3 install -r requirements.txt
 rm -r /var/www/html/*
 cp frontend/* /var/www/html/
 cp local-config-default.yml local-config.yml
+chmod 777 local-config.yml
 /bin/bash start_server.sh
