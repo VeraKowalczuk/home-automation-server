@@ -54,7 +54,7 @@ function move(group, name, direction) { // direction : [up | down]
     if(name === "") {
         dollar = '';   
     }
-    $.post("http://" + window.location.hostname + ":5000/distribute" + group + dollar + name + "/shutter/" + direction);
+    $.post("http://" + window.location.hostname + ":5000/distribute/" + group + dollar + name + "/shutter/" + direction);
 }
 
 function lightswitch(group, name, onoff) { // onoff : [on | off]
@@ -62,7 +62,7 @@ function lightswitch(group, name, onoff) { // onoff : [on | off]
     if(name === "") {
         dollar = '';   
     }
-    $.post("http://" + window.location.hostname + ":5000/distribute" + group + dollar + name + "/light/switch/" + onoff);
+    $.post("http://" + window.location.hostname + ":5000/distribute/" + group + dollar + name + "/light/switch/" + onoff);
 }
 
 function light_offtimer(group, name, seconds) { 
