@@ -57,10 +57,20 @@ function move(group, name, direction) {
     $.post("http://" + window.location.hostname + ":5000/control/" + group + dollar + name + "/" + direction);
 }
 
-function getconfig() {
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function getconfig() {
     $.getJSON("http://" + window.location.hostname + ":5000/config", function(data) {
         $('#accordion').html(data.groups.map(groupTemplate));
         $('#collapse' + data.groups[0].name).addClass("show");
-    });
+    })
+    .fail(function() {
+        $('#accordion').html("Failed to load devices, retrying...");
+        await sleep(5000);
+        getconfig();
+    })
+    ;
     
 }
