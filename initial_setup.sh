@@ -15,4 +15,6 @@ chmod 666 local-config.yml
 CURRENT_PATH=$(dirname "$(readlink -f "$0")")
 SCRIPT_PATH="$CURRENT_PATH/start_server.sh"
 sed -i "s@{#SCRIPT_PATH#}@$SCRIPT_PATH@g" home-automation-server.service
-/bin/bash start_server.sh
+cp home-automation-server.service /etc/systemd/system/
+systemctl enable home-automation-server
+systemctl start home-automation-server
