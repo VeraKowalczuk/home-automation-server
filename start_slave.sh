@@ -4,5 +4,5 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-export FLASK_APP=backend/slave.py
+export FLASK_APP=backend/slave_server.py
 flask run --host=0.0.0.0 --port=4000
