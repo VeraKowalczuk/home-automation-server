@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=5
 User=root
-ExecStart={#SCRIPT_PATH#}
+ExecStart={#LAUNCH_CMD#}
 
 [Install]
 WantedBy=multi-user.target
