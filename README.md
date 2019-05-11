@@ -15,16 +15,18 @@ Tmux
 
 2. Clone the project onto the Raspberry Pi and cd into the root directory.
 
-3. To setup your 
+3. Run
 
     ```
-    
+    ./installationscript.sh
     ```
 
 4. 
 
 
 # Running the Server
+
+
 
 # Accessing the UI
 
