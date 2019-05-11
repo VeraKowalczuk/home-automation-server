@@ -7,7 +7,7 @@ import threading
 import datetime
 
 
-# kind of inelegant timer solution. Using a file makes handling of timers and persistance a lot easier tho
+# kind of inelegant timer solution. Using a file makes handling of timers and persistance a lot easier tho.
 def check_timers():
     t = threading.Timer(softtimer_check_interval, check_timers)
     t.start()
@@ -23,9 +23,8 @@ def reset_timer():
   with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as f:
       f.write("NO TIMER")
 
-app = Flask(__name__)
-GPIO.setmode(GPIO.BCM)
 
+## Load config
 with open(os.path.join(os.path.dirname(__file__),"../local-config.yml"), 'r') as ymlfile:
     cfg = yaml.load(ymlfile,Loader=yaml.SafeLoader)
 
@@ -34,14 +33,21 @@ pin_down = cfg['pins']['down']
 button_press_duration = cfg['misc']['button_press_duration_seconds']
 softtimer_check_interval = cfg['misc']['softtimer_check_interval_seconds']
 
+app = Flask(__name__)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin_up, GPIO.OUT)
 GPIO.setup(pin_down, GPIO.OUT)
 
+
+## Schedule softtimer checks
 if(os.path.isfile(os.path.join(os.path.dirname(__file__), ".timer"))):
   reset_timer()
 
-t = threading.Timer(softtimer_check_interval.0, check_timers)
+t = threading.Timer(softtimer_check_interval, check_timers)
 t.start() 
+
+
+
 
 @app.route('/')
 def index():
@@ -60,7 +66,7 @@ def shutter(direction):
 
       if (direction == "down"):
         pin_used = pin_down
-      else if (direction == "up"):
+      elif (direction == "up"):
         pin_used = pin_up
       else:
         return 'No such direction: '+ direction
@@ -77,9 +83,9 @@ def shutter(direction):
 def light_swich(onoff):
   if request.method == 'POST':
     if onoff == "on":
-      # TODO: TURN ON LIGHT WITH GPIO
-    else if onoff == "off":
-      # TODO: TURN OFF LIGHT WITH GPIO
+      pass# TODO: TURN ON LIGHT WITH GPIO
+    elif (onoff == "off"):
+      pass# TODO: TURN OFF LIGHT WITH GPIO
     pass
 
 
@@ -90,6 +96,6 @@ def light_timer(seconds):
   if request.method == 'POST':
     
     shutoff_time = datetime.now() + datetime.timedelta(seconds=seconds)
-    with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as:
+    with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as f:
       f.write(shutoff_time)
       
