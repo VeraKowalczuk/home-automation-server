@@ -1,0 +1,5 @@
+pins:
+  up: 10
+  down: 27 
+misc:
+  button_press_duration: 0.5
