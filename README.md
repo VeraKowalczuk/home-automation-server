@@ -41,7 +41,6 @@ To update the project just use ```sudo ./update.sh``` from within the directory 
 The ```initial_setup.sh``` and ```update.sh``` script run the servers automatically after finishing.
 To manually start / stop / restart the servers, use the **systemd** commands.
 
-Stop:
 ```
 sudo systemctl {start|stop|restart} home-automation-server-master
 sudo systemctl {start|stop|restart} home-automation-server-slave
