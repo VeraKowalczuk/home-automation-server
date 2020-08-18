@@ -59,6 +59,24 @@
                     <div class="card-body">
                       <button onclick="up()" type="button" class="btn btn-outline-secondary"> Up </button>
                       <button onclick="down()" type="button" class="btn btn-outline-secondary"> Down </button>
+                      <button onclick="displaySchedules('scheduleOne1')" class="btn btn-outline-secondary" type="button">Display Schedules</button>
+                  
+                      
+                      <div class="input-group pl-0 col-md-6 col-lg-4 col-sm-12 pt-3">
+                        <select class="form-control direction-select">
+                          <option value="up">Up</option>
+                          <option value="down">Down</option>
+                        </select>
+                        <select class="form-control day-select">
+                          <option value="always">Always</option>
+                          <option value="workdays">Workdays</option>
+                          <option value="weekend">Weekend</option>
+                        </select>
+                        <input type="time" class="form-control time-select">
+                        <div class="input-group-append">
+                          <button onclick="setTime()" class="btn btn-secondary" type="submit">Set Time</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -68,6 +86,44 @@
                     <div class="card-body">
                       <button onclick="up()" type="button" class="btn btn-outline-secondary"> Up </button>
                       <button onclick="down()" type="button" class="btn btn-outline-secondary"> Down </button>
+
+                    </div>
+
+                    <div class="card-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Day</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Direction</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td><button onclick="editRow()" class="btn btn-outline-secondary">Edit</button></td>
+                            <td><button onclick="deleteRow()" class="btn btn-outline-secondary">Delete</button></td>
+                            
+
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>

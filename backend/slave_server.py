@@ -62,7 +62,7 @@ def config():
 
 
 
-@app.route('/shutter/<direction>', methods=['POST'])
+@app.route('/shutter/move/<direction>', methods=['POST'])
 def shutter(direction):
   if request.method == 'POST':
 
@@ -101,3 +101,7 @@ def light_timer(seconds):
     with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as f:
       f.write(shutoff_time)
       
+
+@app.route('/shutter/addtime/<direction>/<day>/<time>', methods=['POST'])
+def addShedule():
+  #todo
