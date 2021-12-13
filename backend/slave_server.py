@@ -89,6 +89,7 @@ def switch(device_type, host, state):
       print("Unknown state")
   else:
     print("Unknown type")
+  return "done"
       
 @app.route('/timer/<seconds>/<device_type>/<host>/<state>', methods=['POST'])
 def timer(seconds, device_type, host, state):
@@ -107,3 +108,4 @@ def timer(seconds, device_type, host, state):
     except Exception:
       # No JSON in file
       json.dump([timer], f)
+  return "done"
