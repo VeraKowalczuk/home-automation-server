@@ -14,16 +14,19 @@ TIMER_FILE_LOCATION = "/tmp/automation_timers.json"
 def check_timers():
     with open(TIMER_FILE_LOCATION, 'r') as f:
       timers = json.load(f)
-      
+    
+    timers_changed = False
     new_timers = []
     for timer in timers:
-      if datetime.datetime.strptime(timer["time"], "%y-%m-%d %H:%M:%S") > datetime.datetime.now():
+      if datetime.datetime.strptime(timer["time"], "%y-%m-%d %H:%M:%S") <= datetime.datetime.now():
         switch(timer["device_type"], timer["host"], timer["state"])
+        timers_changed = True
       else:
         new_timers.append(timer)
     
-    with open(TIMER_FILE_LOCATION, 'w') as f:
-      json.dump(new_timers, f)
+    if timers_changed:
+      with open(TIMER_FILE_LOCATION, 'w') as f:
+        json.dump(new_timers, f)
 
     # Schedule the next check
     t = threading.Timer(softtimer_check_interval, check_timers)
@@ -105,7 +108,7 @@ def timer(seconds, device_type, host, state):
       timers = json.load(f)
       timers.append(timer)
     except Exception:
-      timers = []
+      timers = [timer]
   with open(TIMER_FILE_LOCATION, 'w') as f:
     json.dump(timers, f)
   return "done"
