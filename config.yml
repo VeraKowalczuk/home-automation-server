@@ -5,6 +5,12 @@ groups:
           host: http://192.168.178.103:4000
         - id: Fenster
           host: http://192.168.178.102:4000
+
+      plugs:
+        - id: Telefon
+          host: "192.168.178.28"
+        - id: Nachtlampe
+          host: "192.168.178.30"
     
 
         

@@ -10,7 +10,7 @@ function getreq() {
     });
 }
 
-const groupTemplate = ({name, members}) => `
+const groupTemplate = ({name, members, plugs}) => `
     <div class="card">
     <div class="card-header">
         <a class="card-link" data-toggle="collapse" href="#collapse${ name }">
@@ -35,7 +35,7 @@ const groupTemplate = ({name, members}) => `
                                     <div class="card-header">${ memberName }</div>
                                     <div class="card-body">
                                         <button onclick="move('${ name }', '${ memberName }', 'up')" type="button" class = "btn btn-outline-secondary"> Up </button>
-                                        <button onclick="move('${ name }', '${ memberName }', 'down')" type="button" class = "btn btn-outline-secondary" > Down </button>
+                                        <button onclick="move('${ name }', '${ memberName }', 'down')" type="button" class = "btn btn-outline-secondary"> Down </button>
                                     </div>
                                 </div>
                             </div>
@@ -45,6 +45,40 @@ const groupTemplate = ({name, members}) => `
                     })()
                 }
             </div>
+            <div class="row">
+                ${ 
+                    (() => {
+                        var str1 = '';
+                        for(var i = 0; i < plugs.length; i++) {
+                            var host_name = plugs[i].host;
+                            var device_type = "tplink"
+                            str1 += `
+                            <div class="col-md-6 col-lg-4 col-sm-12 pb-3">
+                                <div class="card-header"> ${ host_name } </div>
+                                <div class="card-body">
+                                    <div class="pb-3">
+                                        <button onclick="tplink_switch('${ device_type }', '${ host_name }', 'on' )" type="button" class="btn btn-secondary">On</button>
+                                        <button onclick="tplink_switch('${ device_type }', '${ host_name }', 'off' )" type="button" class="btn btn-secondary">Off</button>
+                                    </div>
+                                    <h6 class="card-subtitle mb-2">Turn the Light off with a Timer:</h6> 
+                                    <div class="row"> 
+                                    <button onclick="tplink_timer('${ 30*60 }', '${ device_type }', '${ host_name }', 'off')" type="button" class="btn btn-outline-secondary col timerbutton">30 Minutes</button>
+                                    <button onclick="tplink_timer('${ 60*60 }', '${ device_type }', '${ host_name }', 'off')" type="button" class="timerbutton btn btn-outline-secondary col">1 Hour</button>
+                                    <div class="input-group pl-0 col-md-6 col-lg-4 col-sm-12 timerbutton">
+                                        <input type="number" min="5" class="form-control" placeholder="Minutes" id="'${ host_name }'">
+                                        <div class="input-group-append">
+                                            <button onclick="tplink_timer('${-1}', '${ device_type }', '${ host_name }', 'off')" class="btn btn-secondary" type="submit">Set Timer</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            `;
+                        }
+                        return str1;
+                    })()
+                }
+
         </div>
     </div>
 `
@@ -71,6 +105,17 @@ function light_offtimer(group, name, seconds) {
         dollar = '';   
     }
     $.post("http://" + window.location.hostname + ":5000/distribute/" + group + dollar + name + "/light/offtimer/" + seconds);
+}
+
+function tplink_switch(device_type, host_name, state) { // state : [on | off]
+    $.post("http://" + window.location.hostname + ":5000/switch/" + device_type + "/" + host_name + "/" + state);
+}
+
+function tplink_timer(seconds, device_type, host_name, state) { 
+    if (seconds === -1) {
+        seconds = $(this).prev().val() * 60;
+    }
+    $.post("http://" + window.location.hostname + ":5000/timer/" + seconds + "/" + device_type + "/" + host_name + "/" + state);
 }
 
 function sleep(ms) {
