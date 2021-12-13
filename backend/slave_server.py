@@ -5,26 +5,29 @@ import yaml
 import os
 import threading
 import datetime
+import json
+import pyHS100
 
+TIMER_FILE_LOCATION = "/tmp/automation_timers.json"
 
 # kind of inelegant timer solution. Using a file makes handling of timers and persistance a lot easier tho.
 def check_timers():
+    with open(TIMER_FILE_LOCATION, 'r') as f:
+      timers = json.load(f)
+      
+    new_timers = []
+    for timer in timers:
+      if datetime.datetime.strptime(timer["time"], "%y-%m-%d %H:%M:%S") > datetime.datetime.now():
+        switch(timer["device_type"], timer["host"], timer["state"])
+      else:
+        new_timers.append(timer)
+    
+    with open(TIMER_FILE_LOCATION, 'w') as f:
+      json.dump(new_timers, f)
+
+    # Schedule the next check
     t = threading.Timer(softtimer_check_interval, check_timers)
     t.start()
-
-    with open(os.path.join(os.path.dirname(__file__), ".timer"), 'r') as f:
-      line = f.readline()
-      
-      if line != "NO TIMER":
-        shutoff_time = datetime.datetime.strptime(f.readline(), '%m/%d/%y %H:%M:%S')
-        if (shutoff_time > datetime.datetime.now() ):
-          # TODO: SHUTOFF LIGHT WITH GPIO
-          reset_timer()
-
-def reset_timer():
-  with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as f:
-      f.write("NO TIMER")
-
 
 ## Load config
 with open(os.path.join(os.path.dirname(__file__),"../local-config.yml"), 'r') as ymlfile:
@@ -40,16 +43,13 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin_up, GPIO.OUT)
 GPIO.setup(pin_down, GPIO.OUT)
 
-
 ## Schedule softtimer checks
-if(not os.path.isfile(os.path.join(os.path.dirname(__file__), ".timer"))):
-  reset_timer()
+if not os.path.isfile(TIMER_FILE_LOCATION):
+  with open(TIMER_FILE_LOCATION, 'w') as f:
+      json.dump([], f)
 
 t = threading.Timer(softtimer_check_interval, check_timers)
 t.start() 
-
-
-
 
 @app.route('/')
 def index():
@@ -59,8 +59,6 @@ def index():
 def config():
   if request.method == 'POST':
       request.files['config.yml'].save('./')
-
-
 
 @app.route('/shutter/<direction>', methods=['POST'])
 def shutter(direction):
@@ -79,25 +77,33 @@ def shutter(direction):
 
       return direction
 
-
-
-@app.route('/light/switch/<onoff>', methods=['POST'])
-def light_swich(onoff):
-  if request.method == 'POST':
-    if onoff == "on":
-      pass# TODO: TURN ON LIGHT WITH GPIO
-    elif (onoff == "off"):
-      pass# TODO: TURN OFF LIGHT WITH GPIO
-    pass
-
-
-
-
-@app.route('/light/offtimer/<seconds>', methods=['POST'])
-def light_timer(seconds):
-  if request.method == 'POST':
-    
-    shutoff_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
-    with open(os.path.join(os.path.dirname(__file__), ".timer"), 'w') as f:
-      f.write(shutoff_time)
+@app.route('/switch/<device_type>/<host>/<state>', methods=['POST'])
+def switch(device_type, host, state):
+  if device_type == "tplink":
+    plug = pyHS100.SmartPlug(host)
+    if state == "on":
+      plug.turn_on()
+    elif state == "off":
+      plug.turn_off()
+    else:
+      print("Unknown state")
+  else:
+    print("Unknown type")
       
+@app.route('/timer/<seconds>/<device_type>/<host>/<state>', methods=['POST'])
+def timer(seconds, device_type, host, state):
+  shutoff_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+  timer = {
+    "time": shutoff_time.strftime("%y-%m-%d %H:%M:%S"),
+    "device_type": device_type,
+    "host": host,
+    "state": state
+  }
+  with open(TIMER_FILE_LOCATION, 'rw') as f:
+    try:
+      timers = json.load(f)
+      timers.append(timer)
+      json.dump(timers, f)
+    except Exception:
+      # No JSON in file
+      json.dump([timer], f)
