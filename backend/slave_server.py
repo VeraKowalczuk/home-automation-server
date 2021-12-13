@@ -93,19 +93,19 @@ def switch(device_type, host, state):
       
 @app.route('/timer/<seconds>/<device_type>/<host>/<state>', methods=['POST'])
 def timer(seconds, device_type, host, state):
-  shutoff_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+  shutoff_time = datetime.datetime.now() + datetime.timedelta(seconds=int(seconds))
   timer = {
     "time": shutoff_time.strftime("%y-%m-%d %H:%M:%S"),
     "device_type": device_type,
     "host": host,
     "state": state
   }
-  with open(TIMER_FILE_LOCATION, 'rw') as f:
+  with open(TIMER_FILE_LOCATION, 'r') as f:
     try:
       timers = json.load(f)
       timers.append(timer)
-      json.dump(timers, f)
     except Exception:
-      # No JSON in file
-      json.dump([timer], f)
+      timers = []
+  with open(TIMER_FILE_LOCATION, 'w') as f:
+    json.dump(timers, f)
   return "done"
