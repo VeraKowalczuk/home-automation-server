@@ -72,6 +72,31 @@
                   </div>
                 </div>
               </div>
+
+            <div class="row">
+              <div class="col-md-6 col-lg-4 col-sm-12 pb-3">
+                <div class="card"> 
+                  <div class="card-header"> Veras Licht </div>
+                    <div class="card-body">
+                      <div class="pb-3">
+                          <button onclick="on()" type="button" class="btn btn-secondary">On</button>
+                          <button onclick="off()" type="button" class="btn btn-secondary">Off</button>
+                      </div>
+                      <h6 class="card-subtitle mb-2">Turn the Light off with Timer:</h6> 
+                      <div class="row"> 
+                        <button onclick="timerFor(30)" type="button" class="btn btn-secondary col timerbutton">30 Minutes</button>
+                        <button onclick="timerFor(60)" type="button" class="timerbutton btn btn-secondary col ">1 Hour</button>
+                        <div class="input-group pl-0 col-md-6 col-lg-4 col-sm-12 timerbutton">
+                            <input type="number" min="5" class="form-control" placeholder="Minutes">
+                            <div class="input-group-append">
+                              <button onclick="timerFor()" class="btn btn-secondary" type="submit">Set Timer</button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="card">
@@ -117,9 +142,9 @@
 
     </div> <!-- end of container -->
 
-    <!-- Skript -->
+    <!-- Skript 
     <script src="./script.js"></script>
-
+  -->
     <script type="text/javascript">
       window.onload = getconfig;
     </script>

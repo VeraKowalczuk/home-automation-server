@@ -7,10 +7,10 @@ groups:
           host: http://192.168.178.102:4000
 
       plugs:
-        - id: Telefon
-          host: "192.168.178.28"
         - id: Nachtlampe
           host: "192.168.178.30"
+        - id: Telefon
+          host: "192.168.178.28"
     
 
         
